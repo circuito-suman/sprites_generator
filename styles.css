@@ -1,3 +1,4 @@
+/* Blink animation for the header */
 .header {
     animation: blink 3s linear infinite;
 }
@@ -9,8 +10,7 @@
     25% {
         color: red;
         opacity: 0.25;
-
-    }    
+    }
     50% {
         color: green;
         opacity: 0.50;
@@ -21,6 +21,7 @@
     }
 }
 
+/* Body styling with gradient background and animation */
 body {
     display: flex;
     flex-direction: column;
@@ -35,6 +36,19 @@ body {
     background-attachment: fixed;
 }
 
+@keyframes gradient {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+/* Controls section styling */
 .controls {
     display: flex;
     flex-wrap: wrap;
@@ -43,6 +57,7 @@ body {
     margin-bottom: 20px;
 }
 
+/* Matrix container styling */
 #matrix {
     display: grid;
     gap: 5px;
@@ -50,6 +65,7 @@ body {
     margin-bottom: 5px;
 }
 
+/* LED button styling */
 .led-button {
     width: 30px;
     height: 30px;
@@ -60,12 +76,14 @@ body {
     display: inline-block;
 }
 
+/* Styling for active LED buttons */
 .on {
     background-color: rgb(0, 255, 128);
 }
 
+/* Textarea styling */
 textarea {
-    background-color:white;
+    background-color: white;
     color: rgb(0, 0, 0);
     align-self: center;
     width: 100%;
@@ -74,7 +92,7 @@ textarea {
     margin-bottom: 20px;
 }
 
-
+/* Responsive adjustments for smaller screens */
 @media (max-width: 600px) {
     .led-button {
         width: 20px;
@@ -87,19 +105,12 @@ textarea {
     }
 }
 
-
-
-
-@keyframes gradient {
-    0% {
-        background-position: 0% 0%;
-    }
-    50% {
-        background-position: 100% 100%;
-    }
-    100% {
-        background-position: 0% 0%;
-    }
+/* Wave animation styling */
+.wave-container {
+    position: relative;
+    width: 100%;
+    height: 100px;
+    overflow: hidden;
 }
 
 .wave {
@@ -133,7 +144,6 @@ textarea {
     opacity: 1;
 }
 
-
 @keyframes wave {
     2% {
         transform: translateX(1);
@@ -157,6 +167,7 @@ textarea {
     }
 }
 
+/* Toggle switch container styling */
 .toggle-switch-container {
     display: flex;
     align-items: center;
@@ -219,4 +230,22 @@ input:checked + .slider:before {
 
 .output-label {
     font-size: 14px;
+}
+
+
+.output-label{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.brightness-container{
+    display: flex;
+    color: #ffffff;
+    font-weight: bolder;
+    width: fit-content;
+    flex-direction: column;
+    align-items: center;
+    padding: 4px;
 }
