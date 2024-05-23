@@ -2,17 +2,18 @@
 
 Welcome to the Sprite Generator! This project allows you to create and visualize sprite data in both hexadecimal and binary formats using an interactive LED matrix. Customize the size of your matrix, toggle LED states, and switch between output formats effortlessly. 🎉
 
-## 🌟 Features
+## 🚀 Features
 
-- **Adjustable Matrix**: Change the number of rows and columns to fit your sprite needs.
-- **Interactive LED Buttons**: Click to toggle LED states and see the changes in real-time.
-- **Output Formats**: Choose between hexadecimal and binary output for your sprite data.
-- **Responsive Design**: The matrix and controls are responsive and adapt to different screen sizes.
-- **Animated Background**: Enjoy a visually appealing gradient background with wave animations.
+- **Adjustable Grid Size**: Customize the number of rows and columns.
+- **Toggle LEDs**: Click on grid cells to toggle their state.
+- **Output Formats**: Generate sprite data in hexadecimal or binary format.
+- **Concatenated Hex Output**: Option to generate data for the entire row.
+- **Brightness Control**: Adjust the brightness value, which gets appended to the output data.
+- **Responsive Design**: The interface is responsive and works well on different devices.
 
 
 
-## 🚀 Getting Started
+## 🛠 Getting Started
 
 ### Prerequisites
 
@@ -28,12 +29,27 @@ To run this project, you only need a web browser.
 
 2. **Open the `index.html` file** in your favorite web browser.
 
-## 🛠️ Usage
+## 🌟 Usage
 
-1. **Adjust the Matrix Size**: Use the input fields to set the number of rows and columns.
-2. **Toggle LED States**: Click on the LED buttons to turn them on or off.
-3. **Switch Output Format**: Use the toggle switch to change between hexadecimal and binary output.
-4. **View the Output**: The generated sprite data will be displayed in the textarea below the matrix.
+1. **Adjust Grid Size**:
+   - Use the input fields to set the number of rows and columns for the LED matrix.
+   
+2. **Toggle LEDs**:
+   - Click on the LED buttons to toggle their state (on/off). The button will change color to indicate its state.
+
+3. **Select Output Format**:
+   - Use the toggle switch to select between hexadecimal and binary output formats.
+   
+4. **Whole Row Bits**:
+   - Use the toggle switch to generate data for the entire row, including brightness bits.
+
+5. **Brightness Control**:
+   - Use the slider to adjust the brightness value. This value will be appended to the output data.
+
+6. **View Output**:
+   - The generated sprite data will be displayed in the text area. It updates automatically based on the matrix state and selected options.
+
+
 
 ## 📸 To preview click the icon below
  [![SpriteGenerator](https://img.shields.io/badge/SpriteGenerator-8A2BE2)](https://circuito-suman.github.io/sprites_generator/)
@@ -55,7 +71,7 @@ To run this project, you only need a web browser.
 
 ## 🙏 Acknowledgements
 
-Thank you for checking out this project! If you have any questions or suggestions, feel free to open an issue or reach out to me on social media. Happy coding! 💻✨
+Thank you for checking out this project! If you have any questions or suggestions, feel free to open an issue or reach out to me on social media. Happy sprite generating! 💻✨
 
 ## About Me
 
