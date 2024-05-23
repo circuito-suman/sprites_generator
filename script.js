@@ -1,61 +1,93 @@
+// script.js
+
 const matrix = document.getElementById('matrix');
 let buttons = [];
 
+// Function to generate the matrix
 function generateMatrix() {
-    matrix.innerHTML = ''; // Clear any existing matrix
-    buttons = []; // Reset the buttons array
-    const rows = document.getElementById('rows').value; // Get the number of rows from the input
-    const columns = document.getElementById('columns').value; // Get the number of columns from the input
-    matrix.style.gridTemplateRows = `repeat(${rows}, auto)`; 
-    matrix.style.gridTemplateColumns = `repeat(${columns}, auto)`;
+    matrix.innerHTML = '';
+    buttons = [];
+    const rows = document.getElementById('rows').value;
+    const columns = document.getElementById('columns').value;
 
+    // To create the grid of buttons
     for (let r = 0; r < rows; r++) {
+        const row = document.createElement('div');
+        row.classList.add('row');
         for (let c = 0; c < columns; c++) {
-            const button = document.createElement('button'); // Create a new button element
-            button.classList.add('led-button'); // Add the 'led-button' class to the button
-            button.addEventListener('click', () => toggleLed(button, r, c)); // Add an event listener for the 'click' event to toggle the LED state
-            matrix.appendChild(button); // Append the button to the matrix container
-            buttons.push(button); // Add the button to the buttons array
+            const button = document.createElement('button');
+            button.classList.add('led-button');
+            button.addEventListener('click', () => toggleLed(button, r, c));
+            row.appendChild(button);
+            buttons.push(button);
         }
+        matrix.appendChild(row);
     }
-    updateByteOutput(); 
+    updateByteOutput();
 }
 
+// Function to toggle the LED state
 function toggleLed(button, row, col) {
-    button.classList.toggle('on'); // Toggle the 'on' class for the button
-    updateByteOutput(); // Update the byte output whenever a button is toggled
+    button.classList.toggle('on');
+    updateByteOutput();
 }
 
-function reverseBits(byte) {
-    let binaryString = byte.toString(2).padStart(8, '0'); // Convert byte to binary string and pad to 8 bits
-    let reversedString = binaryString.split('').reverse().join(''); // Reverse the binary string
-    return parseInt(reversedString, 2); // Convert the reversed binary string back to an integer
-}
-
+// Function to update the byte output
 function updateByteOutput() {
-    const rows = document.getElementById('rows').value; // Get the number of rows
-    const columns = document.getElementById('columns').value; // Get the number of columns
-    let byteOutput = ''; 
-    const isBinaryOutput = document.getElementById('outputFormat').checked; // Check the state of the output format toggle
+    const rows = document.getElementById('rows').value;
+    const columns = document.getElementById('columns').value;
+    const binaryOutput = document.getElementById('outputFormat').checked;
+    const wholeRowOutput = document.getElementById('wholeRowOutput').checked;
+    const brightness = document.getElementById('brightness').value;
 
-    for (let r = 0; r < rows; r++) {
-        let byte = 0; 
-        for (let c = 0; c < columns; c++) {
-            const index = r * columns + c; // Calculate the index of the button in the buttons array
-            if (buttons[index].classList.contains('on')) { 
-                byte |= (1 << c); // Set the corresponding bit in the byte
+    let byteOutput = '';
+    let matrixData = [];
+    let brightnessBits = Math.min(Math.max(Math.floor(brightness / 4), 0), 63); // Scale brightness to 0-63
+
+    if (wholeRowOutput) {
+        // Generate as a whole row bits
+        for (let r = 0; r < rows; r++) {
+            let rowBits = 0;
+            for (let c = 0; c < columns; c++) {
+                const index = r * columns + c;
+                if (buttons[index].classList.contains('on')) {
+                    rowBits |= (1 << c);
+                }
+            }
+            matrixData.push(rowBits);
+        }
+
+        if (binaryOutput) {
+            matrixData.forEach(row => {
+                byteOutput += row.toString(2).padStart(8, '0') + ' ';
+            });
+            byteOutput += brightnessBits.toString(2).padStart(6, '0');
+        } else {
+            matrixData.forEach(row => {
+                byteOutput += row.toString(16).padStart(2, '0');
+            });
+            byteOutput += brightnessBits.toString(16).padStart(2, '0');
+        }
+    } else {
+        // Generate individual row data
+        for (let r = 0; r < rows; r++) {
+            let byte = 0;
+            for (let c = 0; c < columns; c++) {
+                const index = r * columns + c;
+                if (buttons[index].classList.contains('on')) {
+                    byte |= (1 << c);
+                }
+            }
+            if (binaryOutput) {
+                byteOutput += '0b' + byte.toString(2).padStart(8, '0').split('').reverse().join('') + ', ';
+            } else {
+                byteOutput += '0x' + byte.toString(16).padStart(2, '0') + ', ';
             }
         }
-        if (isBinaryOutput) {
-            byte = reverseBits(byte); // Reverse the bits in the byte
-            byteOutput += '0b' + byte.toString(2).padStart(8, '0') + ', '; // Append the binary byte to the output string
-        } else {
-            byteOutput += '0x' + byte.toString(16).padStart(2, '0') + ', '; // Append the hexadecimal byte to the output string
-        }
     }
 
-    document.getElementById('byteOutput').value = byteOutput.slice(0, -2); // Set the value of the byte output textarea, removing the trailing comma and space
+    document.getElementById('byteOutput').value = byteOutput;
 }
 
-//start the generation
+// Start matrix generation
 generateMatrix();
