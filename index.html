@@ -27,6 +27,17 @@
         </label>
         <span class="output-label">Binary Output</span>
     </div>
+    <div class="toggle-switch-container">
+        <label class="switch">
+            <input type="checkbox" id="wholeRowOutput" onchange="updateByteOutput()">
+            <span class="slider round"></span>
+        </label>
+        <span class="output-label">Concatenated Hex Output</span>
+    </div>
+    <div class="brightness-container">
+        <label for="brightness">Brightness:</label>
+        <input type="range" id="brightness" min="0" max="100" value="50" oninput="updateByteOutput()">
+    </div>
     <div class="wave-container">
         <div class="wave"></div>
         <div class="wave"></div>
